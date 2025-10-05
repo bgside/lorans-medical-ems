@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorans Medical EMS - Live Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: #fff;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .location-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .location-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .demo-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            opacity: 0.8;
+        }
+        
+        /* Features Section */
+        .features {
+            background: rgba(0,0,0,0.1);
+            padding: 4rem 2rem;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Demo Preview */
+        .demo-preview {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .demo-preview h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .preview-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+        
+        .preview-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: rgba(255,255,255,0.4);
+        }
+        
+        .preview-content {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .demo-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-user-md floating"></i>
+                <h1>Lorans Medical EMS</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Live Demo</a>
+                <a href="https://github.com/bgside/lorans-medical-ems" target="_blank">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="fade-in">Lorans Medical EMS</h1>
+        <p class="fade-in">Enterprise Healthcare Employee Management System</p>
+        
+        <div class="location-badges fade-in">
+            <div class="location-badge">🇸🇾 Syria Call Center - 70+ Employees</div>
+            <div class="location-badge">🇹🇷 Turkey Clinic - 5+ Medical Staff</div>
+        </div>
+        
+        <div class="demo-buttons fade-in">
+            <a href="#demo" class="btn btn-primary">
+                <i class="fas fa-play"></i> Live Demo
+            </a>
+            <a href="https://github.com/bgside/lorans-medical-ems" target="_blank" class="btn btn-secondary">
+                <i class="fab fa-github"></i> View Source
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-card fade-in">
+            <i class="fas fa-users"></i>
+            <h3>75+</h3>
+            <p>Total Employees</p>
+        </div>
+        <div class="stat-card fade-in">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>2</h3>
+            <p>Locations</p>
+        </div>
+        <div class="stat-card fade-in">
+            <i class="fas fa-chart-line"></i>
+            <h3>96%</h3>
+            <p>Attendance Rate</p>
+        </div>
+        <div class="stat-card fade-in">
+            <i class="fas fa-dollar-sign"></i>
+            <h3>$245K</h3>
+            <p>Monthly Payroll</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="fade-in">Enterprise Features</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <i class="fas fa-building"></i>
+                <h3>Multi-Location Management</h3>
+                <p>Manage employees across Syria call center and Turkey clinic with location-specific permissions and timezone support.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Role-Based Access Control</h3>
+                <p>5-tier security hierarchy from Super Admin to Employee with comprehensive permission management.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-clock"></i>
+                <h3>Attendance & Time Tracking</h3>
+                <p>Digital clock-in/out system with overtime calculation and comprehensive attendance analytics.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Payroll Management</h3>
+                <p>Automated salary calculations with commission tracking for sales team and tax computations.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Performance Analytics</h3>
+                <p>Call center metrics, conversion rates, and employee productivity tracking with KPI dashboards.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Responsive Design</h3>
+                <p>Modern healthcare-themed interface that works perfectly on desktop, tablet, and mobile devices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Preview Section -->
+    <section class="demo-preview" id="demo">
+        <h2 class="fade-in">Live System Preview</h2>
+        <div class="preview-container fade-in">
+            <div class="preview-tabs">
+                <button class="tab-btn active" onclick="showTab('login')">Login</button>
+                <button class="tab-btn" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="tab-btn" onclick="showTab('employees')">Employees</button>
+                <button class="tab-btn" onclick="showTab('reports')">Reports</button>
+            </div>
+            
+            <div class="preview-content" id="preview-content">
+                <div style="text-align: center;">
+                    <i class="fas fa-laptop-code" style="font-size: 4rem; opacity: 0.5; margin-bottom: 1rem;"></i>
+                    <h3>Professional Login Interface</h3>
+                    <p>Secure authentication with modern healthcare theming</p>
+                    <br>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; display: inline-block;">
+                        <strong>Demo Credentials:</strong><br>
+                        Username: <code style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.5rem; border-radius: 4px;">admin</code><br>
+                        Password: <code style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.5rem; border-radius: 4px;">password</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Lorans Medical Employee Management System. Built with PHP, MySQL, HTML & CSS.</p>
+        <p>Multi-location healthcare management for Syria and Turkey operations.</p>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Tab switching
+        function showTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            const content = document.getElementById('preview-content');
+            
+            const tabContent = {
+                login: `
+                    <div style="text-align: center;">
+                        <i class="fas fa-sign-in-alt" style="font-size: 4rem; opacity: 0.7; margin-bottom: 1rem;"></i>
+                        <h3>Professional Login Interface</h3>
+                        <p>Secure authentication with healthcare theming and location badges</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; display: inline-block; margin-top: 1rem;">
+                            <strong>Demo Credentials:</strong><br>
+                            Username: <code>admin</code> | Password: <code>password</code>
+                        </div>
+                    </div>
+                `,
+                dashboard: `
+                    <div style="text-align: center;">
+                        <i class="fas fa-tachometer-alt" style="font-size: 4rem; opacity: 0.7; margin-bottom: 1rem;"></i>
+                        <h3>Executive Dashboard</h3>
+                        <p>Real-time statistics, location breakdowns, and activity monitoring</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong>75</strong><br>Total Employees
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong>52</strong><br>Present Today
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong>96%</strong><br>Attendance Rate
+                            </div>
+                        </div>
+                    </div>
+                `,
+                employees: `
+                    <div style="text-align: center;">
+                        <i class="fas fa-users" style="font-size: 4rem; opacity: 0.7; margin-bottom: 1rem;"></i>
+                        <h3>Employee Management</h3>
+                        <p>Complete profiles, department assignments, and multi-location tracking</p>
+                        <div style="margin-top: 1rem;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; margin: 0.25rem;">Sales Team: 45 employees</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; margin: 0.25rem;">Call Operations: 25 employees</div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; margin: 0.25rem;">Medical Services: 5 employees</div>
+                        </div>
+                    </div>
+                `,
+                reports: `
+                    <div style="text-align: center;">
+                        <i class="fas fa-chart-line" style="font-size: 4rem; opacity: 0.7; margin-bottom: 1rem;"></i>
+                        <h3>Analytics & Reports</h3>
+                        <p>Performance metrics, payroll reports, and productivity analytics</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong>1,247</strong><br>Calls Made
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong>23%</strong><br>Conversion Rate
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong>$12.5K</strong><br>Revenue Generated
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+            
+            content.innerHTML = tabContent[tabName];
+        }
+
+        // Initialize first tab content
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add initial fade-in visibility to elements in viewport
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
