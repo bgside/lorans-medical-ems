@@ -1,0 +1,12 @@
+# Icon Placeholder
+# In a real deployment, replace this with:
+# - icon.png (256x256 PNG for general use)
+# - icon.ico (Windows ICO format)
+# - icon.icns (macOS format)
+# 
+# For now, Electron will use a default icon
+# 
+# Recommended tools:
+# - https://www.icoconverter.com/ (convert PNG to ICO)
+# - Use a medical/healthcare themed icon
+# - Colors: Blue (#667eea) and Purple (#764ba2) to match theme
